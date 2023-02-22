@@ -21,6 +21,7 @@ export default function App() {
   const setToken = async (token) => {
     if (token) {
       await AsyncStorage.setItem("userToken", token);
+      // console.log(token);
     } else {
       await AsyncStorage.removeItem("userToken");
     }

@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/core";
 import {
   View,
   Text,
   TextInput,
+  TouchableHighlight,
   TouchableOpacity,
   StyleSheet,
   KeyboardAvoidingView,
   Alert,
+  Image,
 } from "react-native";
 import axios from "axios";
 
@@ -49,9 +52,14 @@ const SignUpScreen = ({ setToken }) => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <KeyboardAwareScrollView style={styles.container} behavior="padding">
       <View style={styles.logoContainer}>
-        <Text style={styles.logo}>Airbnb</Text>
+        <Image
+          source={require("../assets/img/airbnb.png")}
+          resizeMode="contain"
+          style={styles.logo}
+        />
+        <Text style={styles.screenTitle}>Sign up</Text>
       </View>
       <View style={styles.formContainer}>
         <TextInput
@@ -68,11 +76,11 @@ const SignUpScreen = ({ setToken }) => {
           autoCapitalize="none"
         />
         <TextInput
-          style={styles.input}
+          style={styles.description}
           placeholder="Description"
           onChangeText={(text) => setDescription(text)}
           multiline
-          numberOfLines={4}
+          numberOfLines={8}
         />
         <TextInput
           style={styles.input}
@@ -86,9 +94,13 @@ const SignUpScreen = ({ setToken }) => {
           onChangeText={(text) => setConfirmPassword(text)}
           secureTextEntry={true}
         />
-        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor="#ff5a5f"
+          onPress={handleSignUp}
+        >
           <Text style={styles.buttonText}>Sign Up</Text>
-        </TouchableOpacity>
+        </TouchableHighlight>
         <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
           <Text style={styles.signInText}>
             Already have an account?{" "}
@@ -96,14 +108,14 @@ const SignUpScreen = ({ setToken }) => {
           </Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f8f8",
+    backgroundColor: "#FFF",
   },
   logoContainer: {
     alignItems: "center",
@@ -111,30 +123,51 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   logo: {
-    fontSize: 40,
+    marginTop: 20,
+    marginBottom: 20,
+    height: 100,
+    width: 100,
+  },
+  screenTitle: {
+    fontSize: 25,
     fontWeight: "bold",
-    color: "#ff5a5f",
+    color: "#666",
   },
   formContainer: {
     padding: 20,
     paddingBottom: 40,
-    backgroundColor: "#ffffff",
+    alignItems: "center",
   },
   input: {
+    width: "100%",
     height: 50,
-    backgroundColor: "#f2f2f2",
     marginBottom: 20,
+    borderBottomColor: "#ff5a5f",
+    borderBottomWidth: 1,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+  },
+  description: {
+    width: "100%",
+    height: 100,
+    marginBottom: 20,
+    borderColor: "#ff5a5f",
+    borderWidth: 1,
     paddingHorizontal: 10,
     borderRadius: 5,
   },
   button: {
-    backgroundColor: "#ff5a5f",
+    marginTop: 50,
+    width: "50%",
+    backgroundColor: "#FFF",
+    borderColor: "#ff5a5f",
+    borderWidth: 3,
     paddingVertical: 15,
-    borderRadius: 5,
+    borderRadius: 30,
   },
   buttonText: {
     textAlign: "center",
-    color: "#ffffff",
+    color: "#666",
     fontWeight: "700",
   },
   signInText: {

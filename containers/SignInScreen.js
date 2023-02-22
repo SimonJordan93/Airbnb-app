@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/core";
 import {
   View,
@@ -6,8 +7,8 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  KeyboardAvoidingView,
   Alert,
+  Image,
 } from "react-native";
 import axios from "axios";
 
@@ -42,9 +43,14 @@ const SignInScreen = ({ setToken }) => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <KeyboardAwareScrollView style={styles.container} behavior="padding">
       <View style={styles.logoContainer}>
-        <Text style={styles.logo}>Airbnb</Text>
+        <Image
+          source={require("../assets/img/airbnb.png")}
+          resizeMode="contain"
+          style={styles.logo}
+        />
+        <Text style={styles.screenTitle}>Sign in</Text>
       </View>
       <View style={styles.formContainer}>
         <TextInput
@@ -69,14 +75,14 @@ const SignInScreen = ({ setToken }) => {
           </Text>
         </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f8f8",
+    backgroundColor: "white",
   },
   logoContainer: {
     alignItems: "center",
@@ -84,30 +90,43 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   logo: {
-    fontSize: 40,
+    marginTop: 20,
+    marginBottom: 20,
+    height: 100,
+    width: 100,
+  },
+  screenTitle: {
+    fontSize: 25,
     fontWeight: "bold",
-    color: "#ff5a5f",
+    color: "#666",
   },
   formContainer: {
+    // backgroundColor: "black",
     padding: 20,
     paddingBottom: 40,
-    backgroundColor: "#ffffff",
+    alignItems: "center",
   },
   input: {
+    width: "100%",
     height: 50,
-    backgroundColor: "#f2f2f2",
     marginBottom: 20,
+    borderBottomColor: "#ff5a5f",
+    borderBottomWidth: 1,
     paddingHorizontal: 10,
     borderRadius: 5,
   },
   button: {
-    backgroundColor: "#ff5a5f",
+    marginTop: 50,
+    width: "50%",
+    backgroundColor: "#FFF",
+    borderColor: "#ff5a5f",
+    borderWidth: 3,
     paddingVertical: 15,
-    borderRadius: 5,
+    borderRadius: 30,
   },
   buttonText: {
     textAlign: "center",
-    color: "#ffffff",
+    color: "#666",
     fontWeight: "700",
   },
   signInText: {
